@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useToast } from "@/hooks/use-toast"
 import { Phone, Mail, Globe, MapPin } from "lucide-react"
+import { supabase } from "@/lib/supabaseClient"
 
 export default function CreateCard() {
   const { toast } = useToast()
@@ -37,24 +38,44 @@ export default function CreateCard() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real app, we would save the card to a database
-    setCardCreated(true)
-
-    // Generate a unique URL for the card
-    const cardSlug = formData.name.toLowerCase().replace(/\s+/g, "-")
-    const baseUrl = window.location.origin
-    const fullCardUrl = `${baseUrl}/card/${cardSlug}`
-    setCardUrl(fullCardUrl)
-
-    // Generate QR code
-    generateQRCode(fullCardUrl)
-
-    toast({
-      title: "Business card created!",
-      description: "Your digital business card is now ready to share.",
-    })
+  
+    try {
+      // Save the card to Supabase
+      const { data, error } = await supabase
+        .from('business_cards')
+        .insert([formData])
+        .select()
+  
+      if (error) {
+        throw error
+      }
+  
+      // Set card created state
+      setCardCreated(true)
+  
+      // Generate a unique URL for the card
+      const cardSlug = formData.name.toLowerCase().replace(/\s+/g, "-")
+      const baseUrl = window.location.origin
+      const fullCardUrl = `${baseUrl}/card/${cardSlug}`
+      setCardUrl(fullCardUrl)
+  
+      // Generate QR code
+      generateQRCode(fullCardUrl)
+  
+      toast({
+        title: "Business card created!",
+        description: "Your digital business card is now ready to share.",
+      })
+    } catch (error) {
+      console.error("Error saving business card:", error)
+      toast({
+        title: "Error",
+        description: "There was an error saving your business card. Please try again.",
+        variant: "destructive",
+      })
+    }
   }
 
   const generateQRCode = async (url: string) => {
