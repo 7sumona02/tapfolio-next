@@ -39,44 +39,46 @@ export default function CreateCard() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
   
     try {
-      // Save the card to Supabase
+      // Generate a slug from the name
+      const slug = formData.name.toLowerCase().replace(/\s+/g, "-");
+  
+      // Save the card to Supabase with the slug
       const { data, error } = await supabase
-        .from('business_cards')
-        .insert([formData])
-        .select()
+        .from("business_cards")
+        .insert([{ ...formData, slug }])
+        .select();
   
       if (error) {
-        throw error
+        throw error;
       }
   
       // Set card created state
-      setCardCreated(true)
+      setCardCreated(true);
   
       // Generate a unique URL for the card
-      const cardSlug = formData.name.toLowerCase().replace(/\s+/g, "-")
-      const baseUrl = window.location.origin
-      const fullCardUrl = `${baseUrl}/card/${cardSlug}`
-      setCardUrl(fullCardUrl)
+      const baseUrl = window.location.origin;
+      const fullCardUrl = `${baseUrl}/card/${slug}`;
+      setCardUrl(fullCardUrl);
   
       // Generate QR code
-      generateQRCode(fullCardUrl)
+      generateQRCode(fullCardUrl);
   
       toast({
         title: "Business card created!",
         description: "Your digital business card is now ready to share.",
-      })
+      });
     } catch (error) {
-      console.error("Error saving business card:", error)
+      console.error("Error saving business card:", error);
       toast({
         title: "Error",
         description: "There was an error saving your business card. Please try again.",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const generateQRCode = async (url: string) => {
     try {
