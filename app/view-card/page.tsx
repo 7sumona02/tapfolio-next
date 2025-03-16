@@ -19,31 +19,32 @@ export default async function ViewCardsPage() {
     <div className="container mx-auto py-8 max-w-5xl">
       <h1 className="text-2xl font-bold mb-8">View Business Cards</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {cards.map((card) => (
-  <Card key={card.id} className="w-full bg-white shadow-xl">
-    <CardContent className="p-6">
-    <Link href={`/card/${card.slug}`}><h3 className="text-xl font-bold">{card.name}</h3></Link>
-    <p className="text-green-600 font-medium">{card.title}</p>
-    <p className="text-sm text-gray-500">{card.company}</p>
+        {cards.map((card) => (
+          <Card key={card.id} className="w-full bg-white shadow-xl">
+            <CardContent className="p-6">
+              <Link href={`/card/${card.slug}`}>
+                <h3 className="text-xl font-bold">{card.name}</h3>
+              </Link>
+              <p className="text-green-600 font-medium">{card.title}</p>
+              <p className="text-sm text-gray-500">{card.company}</p>
 
-    <div className="mt-6 flex space-x-4">
-      <ShareModal slug={card.slug}>
-        <Button variant="outline">
-          Share
-        </Button>
-      </ShareModal>
-      <form action={deleteCard} className="inline">
-        <input type="hidden" name="id" value={card.id} />
-        <Button variant="destructive"
-          type="submit"
-        >
-          Delete
-        </Button>
-      </form>
-    </div>
-    </CardContent>
-  </Card>
-))}
+              <div className="mt-6 flex space-x-4">
+                <ShareModal slug={card.slug}>
+                  <Button variant="outline">Share</Button>
+                </ShareModal>
+                <Link href={`/edit-card/${card.id}`}>
+                  <Button variant="outline">Edit</Button>
+                </Link>
+                <form action={deleteCard} className="inline">
+                  <input type="hidden" name="id" value={card.id} />
+                  <Button variant="destructive" type="submit">
+                    Delete
+                  </Button>
+                </form>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );
