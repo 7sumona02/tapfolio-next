@@ -24,6 +24,9 @@ const Header = () => {
             <Link href="/create" className="text-sm font-medium hover:underline">
               Create Card
             </Link>
+            <Link href="/view-card" className="text-sm font-medium hover:underline">
+              View Card
+            </Link>
             <SignedOut>
                 <Button><SignInButton /></Button>
             </SignedOut>
