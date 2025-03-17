@@ -14,8 +14,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useToast } from "@/hooks/use-toast"
 import { Phone, Mail, Globe, MapPin } from "lucide-react"
 import { supabase } from "@/lib/supabaseClient"
+import { useUser } from "@clerk/nextjs"
 
 export default function CreateCard() {
+  const { user } = useUser()
   const { toast } = useToast()
   const [formData, setFormData] = useState({
     name: "",
@@ -40,32 +42,44 @@ export default function CreateCard() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
+    if (!user) {
+      toast({
+        title: "User not found",
+        description: "You must be logged in to create a business card.",
+        variant: "destructive",
+      });
+      return; // Exit the function if user is not defined
+    }
+
     try {
       // Generate a slug from the name
       const slug = formData.name.toLowerCase().replace(/\s+/g, "-");
-  
-      // Save the card to Supabase with the slug
+
+      // Assuming you have a mapping of Clerk user ID to a valid UUID
+      const userId = user.id; // This may need to be adjusted if it's not a valid UUID
+
+      // Save the card to Supabase with the slug and user_id
       const { data, error } = await supabase
         .from("business_cards")
-        .insert([{ ...formData, slug }])
+        .insert([{ ...formData, slug, user_id: userId }]) // Ensure userId is a valid UUID
         .select();
-  
+
       if (error) {
         throw error;
       }
-  
+
       // Set card created state
       setCardCreated(true);
-  
+
       // Generate a unique URL for the card
       const baseUrl = window.location.origin;
       const fullCardUrl = `${baseUrl}/card/${slug}`;
       setCardUrl(fullCardUrl);
-  
+
       // Generate QR code
       generateQRCode(fullCardUrl);
-  
+
       toast({
         title: "Business card created!",
         description: "Your digital business card is now ready to share.",

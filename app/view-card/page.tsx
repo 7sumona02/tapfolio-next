@@ -4,12 +4,16 @@ import { redirect } from "next/navigation";
 import { ShareModal } from "@/components/ShareModal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function ViewCardsPage() {
+  const {userId} = await auth();
+
   // Fetch all business cards from Supabase
   const { data: cards, error } = await supabase
     .from("business_cards")
-    .select("*");
+    .select("*")
+    .eq("user_id", userId);
 
   if (error) {
     return <div>Error loading business cards. Please try again later.</div>;
