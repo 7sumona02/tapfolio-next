@@ -4,7 +4,7 @@ export default function HeroImage() {
   return (
     <div className="relative h-[400px] w-full rounded-lg overflow-hidden shadow-xl">
       <Image
-        src="/placeholder.svg?height=800&width=600"
+        src="/hero.jpg"
         alt="Digital business cards being shared between devices"
         fill
         className="object-cover"
