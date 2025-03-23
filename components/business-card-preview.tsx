@@ -5,7 +5,7 @@ import Image from "next/image"
 export default function BusinessCardPreview() {
   return (
     <div className="relative">
-      <Card className="w-[350px] bg-white shadow-xl">
+      <Card className="md:w-[350px] w-[300px] bg-white shadow-xl">
         <CardContent className="p-6">
           <div className="flex gap-4">
             {/* <div className="relative h-20 w-20 rounded-full overflow-hidden border-2 border-green-500">

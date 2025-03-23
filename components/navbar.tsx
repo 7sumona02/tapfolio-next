@@ -10,7 +10,7 @@ import {
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Menu, MoveRight, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { SignedIn, SignedOut, SignInButton, SignOutButton, UserButton } from "@clerk/nextjs";
 
@@ -34,12 +34,12 @@ function Navbar1() {
                     href: "/#how-it-works",
                 },
                 {
-                    title: "Tutorial",
-                    href: "/#tutorial",
+                    title: "Create Card",
+                    href: "/create",
                 },
                 {
-                    title: "Reviews",
-                    href: "/#reviews",
+                    title: "View Card",
+                    href: "/view-card",
                 },
             ],
         },
@@ -52,8 +52,8 @@ function Navbar1() {
                     href: "/about",
                 },
                 {
-                    title: "Fundraising",
-                    href: "/fundraising",
+                    title: "Reviews",
+                    href: "/#reviews",
                 },
                 {
                     title: "Investors",
@@ -68,9 +68,28 @@ function Navbar1() {
     ];
 
     const [isOpen, setOpen] = useState(false);
+
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 0) {
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+  
     return (
-        <header className="w-full z-40 fixed top-0 left-0 border-b border-gray-200 bg-white/50 backdrop-blur-lg transition-all">
-            <div className="px-5 container relative mx-auto h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center">
+        <header
+            className={`w-full z-40 fixed top-0 left-0 border-b bg-white/50 backdrop-blur-lg transition-all ${
+            isScrolled ? "" : "border-transparent"
+            }`}>        
+          <div className="px-5 container relative mx-auto h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center">
                 <div className="justify-start items-center gap-4 lg:flex hidden flex-row">
                     <NavigationMenu className="flex justify-start items-start">
                         <NavigationMenuList className="flex justify-start gap-4 flex-row">

@@ -8,9 +8,9 @@ import { HeroVideoDialogDemo } from "@/components/demo"
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen w-screen">
+    <div className="flex flex-col min-h-screen w-screen overflow-hidden">
       <main className="flex-1">
-        <section className="py-32 md:py-40">
+        <section className="py-32 md:py-40 px-5 md:px-0">
           <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
             <div className="flex-1 space-y-6">
               <div className="inline-block rounded-lg bg-green-100 px-3 py-1 text-sm text-green-800">
@@ -33,7 +33,7 @@ export default function Home() {
                   <Link href="#how-it-works">Learn More</Link>
                 </Button>
               </div>
-              <div className="text-sm text-gray-500">Join over 10,000 professionals already using EcoCard</div>
+              <div className="text-sm text-gray-500">Join over 10,000 professionals already using Tapfolio</div>
             </div>
             <div className="flex-1">
               {/* <HeroImage /> */}
@@ -43,7 +43,7 @@ export default function Home() {
         </section>
 
         <section id="features" className="py-20 bg-gray-50">
-          <div className="container mx-auto">
+          <div className="container mx-auto px-5 md:px-0">
             <h2 className="text-3xl font-bold text-center mb-12">Why Choose Digital Business Cards?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <FeatureCard
@@ -66,7 +66,7 @@ export default function Home() {
         </section>
 
         <section id="how-it-works" className="py-20">
-          <div className="container mx-auto">
+          <div className="container mx-auto px-5 md:px-0">
             <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
@@ -115,7 +115,7 @@ export default function Home() {
         </section>
 
         <section className="py-20 bg-green-50">
-          <div className="container mx-auto text-center space-y-8">
+          <div className="container mx-auto text-center space-y-8 px-5 md:px-0">
             <h2 className="text-3xl font-bold">Ready to Go Paperless?</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Join thousands of professionals who have already made the switch to sustainable networking.
@@ -130,9 +130,9 @@ export default function Home() {
   <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
     <div className="flex items-center gap-2">
       <Leaf className="h-5 w-5 text-green-600" />
-      <span className="font-bold">EcoCard</span>
+      <span className="font-bold">Tapfolio</span>
     </div>
-    <div className="text-sm text-gray-500">© {new Date().getFullYear()} EcoCard. All rights reserved.</div>
+    <div className="text-sm text-gray-500">© {new Date().getFullYear()} Tapfolio. All rights reserved.</div>
     <div className="flex gap-6">
       <Link href="#" className="text-sm text-gray-500 hover:text-gray-900">
         Privacy

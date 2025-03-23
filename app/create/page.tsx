@@ -137,7 +137,7 @@ export default function CreateCard() {
 
   return (
     <div className="container mx-auto py-8 max-w-5xl">
-      <div className="flex items-center mb-8">
+      {/* <div className="flex items-center mb-8">
         <Button variant="ghost" size="sm" asChild className="mr-4">
           <Link href="/">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -145,10 +145,10 @@ export default function CreateCard() {
           </Link>
         </Button>
         <h1 className="text-2xl font-bold">Create Your Digital Business Card</h1>
-      </div>
+      </div> */}
 
       {!cardCreated ? (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-20">
           <div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-4">
