@@ -28,7 +28,7 @@ const Header = () => {
               View Card
             </Link>
             <SignedOut>
-                <Button><SignInButton /></Button>
+                <Button><SignInButton mode='modal' /></Button>
             </SignedOut>
             <SignedIn>
                 <UserButton />
