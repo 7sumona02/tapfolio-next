@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Header from '@/components/Header'
 import {ClerkProvider} from '@clerk/nextjs'
+import { Navbar1 } from '@/components/navbar'
 
 export const metadata: Metadata = {
   title: 'tapfolio',
@@ -17,7 +17,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body>
-        <Header />
+        <Navbar1 />
         {children}</body>
     </html>
     </ClerkProvider>

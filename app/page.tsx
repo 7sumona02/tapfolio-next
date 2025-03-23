@@ -1,16 +1,16 @@
 import Link from "next/link"
 import { Leaf, Share2, Smartphone } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import HeroImage from "@/components/hero-image"
 import FeatureCard from "@/components/feature-card"
 import BusinessCardPreview from "@/components/business-card-preview"
 import { ArrowRightIcon } from "@/public/icons/icon1"
+import { HeroVideoDialogDemo } from "@/components/demo"
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen w-screen">
       <main className="flex-1">
-        <section className="py-20 md:py-28">
+        <section className="py-32 md:py-40">
           <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
             <div className="flex-1 space-y-6">
               <div className="inline-block rounded-lg bg-green-100 px-3 py-1 text-sm text-green-800">
@@ -36,7 +36,8 @@ export default function Home() {
               <div className="text-sm text-gray-500">Join over 10,000 professionals already using EcoCard</div>
             </div>
             <div className="flex-1">
-              <HeroImage />
+              {/* <HeroImage /> */}
+              <HeroVideoDialogDemo />
             </div>
           </div>
         </section>
@@ -102,9 +103,9 @@ export default function Home() {
                     Change your information once, and it updates everywhere your card is shared.
                   </p>
                 </div>
-                <Button size="lg" asChild className="mt-4">
+                {/* <Button size="lg" asChild className="mt-4">
                   <Link href="/create">Create Your Card Now</Link>
-                </Button>
+                </Button> */}
               </div>
               <div className="flex justify-center">
                 <BusinessCardPreview />
